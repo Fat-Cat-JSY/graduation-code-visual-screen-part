@@ -489,8 +489,8 @@ def schemaName_spider(request, tableName):
     if request.method in ["POST", "GET"]:
         msg = {"code": normal_code, "msg": "成功", "data": []}
         # Linux
-        # cmd = "cd /yykj/python/9999/spider3t89kuq6 && scrapy crawl "+tableName+"Spider -a databaseName=taobao_spider_db"
-        # cmd = "cd /yykj/python/9999/spider3t89kuq6 && scrapy crawl "+tableName+"Spider -a databaseName=taobao_spider_db"
+        # cmd = "cd /yykj/python/9999/spiderDataClean && scrapy crawl "+tableName+"Spider -a databaseName=taobao_spider_db"
+        # cmd = "cd /yykj/python/9999/spiderDataClean && scrapy crawl "+tableName+"Spider -a databaseName=taobao_spider_db"
         # Windows
         # cmd = "cd D:\\BYSJ\\spider && scrapy crawl " + tableName + "Spider -a databaseName=taobao_spider_db"
         cmd = "cd D:\\BYSJ\\spider && scrapy crawl " + tableName + "Spider -a databaseName=taobao_spider_db"
