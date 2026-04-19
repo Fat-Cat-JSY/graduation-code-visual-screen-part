@@ -2,8 +2,8 @@
 
 from impala.dbapi import connect
 
-from dj2.settings import dbName
-from util.convert_mysql_to_hive import ConvertMySQLToHive
+from backend.graduation_project.settings import dbName
+from scripts.convert_mysql_to_hive import ConvertMySQLToHive
 
 
 def hive_func(sql_list: list):

@@ -4,9 +4,9 @@ from django.utils.deprecation import MiddlewareMixin
 from django.http import JsonResponse
 from django.apps import apps
 
-from util.auth import Auth
-from util.codes import *
-from dj2.settings import dbName as schemaName
+from utils.auth import Auth
+from utils.codes import *
+from backend.graduation_project.settings import dbName as schemaName
 
 
 class Xauth(MiddlewareMixin):
@@ -68,7 +68,7 @@ class Xauth(MiddlewareMixin):
                 "updateBrowseDuration",
             ]
 
-            allModels = apps.get_app_config('main').get_models()
+            allModels = apps.get_app_config('core').get_models()
             # print("allModels:",allModels.)
             for m in allModels:
                 try:

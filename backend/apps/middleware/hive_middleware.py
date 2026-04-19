@@ -3,8 +3,8 @@
 from django.db import connection
 from django.utils.deprecation import MiddlewareMixin
 
-from util.hive_func import hive_func
-from dj2.settings import dbName
+from backend.apps.analytics.services.hive_service import hive_func
+from backend.graduation_project.settings import dbName
 rename={
 
     }
