@@ -87,6 +87,7 @@ def taobaoinfoforecast_forecast(request):
         query = "SELECT prosheng,title,salesnum,jiage, shoptag FROM taobaoinfo"
         #2.处理缺失值
         df = pd.read_sql(query, connection).dropna()
+        df = df[df['shoptag'].str.contains('回头客', na=False)]
         id = req_dict.pop('id',None)
         req_dict.pop('addtime',None)
         #数据预处理
