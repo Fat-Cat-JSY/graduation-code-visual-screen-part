@@ -1,8 +1,8 @@
 # coding: utf-8
 
-from util.configread import config_read
-from util.convert_mysql_to_hive import ConvertMySQLToHive
-from util.hive_func import hive_execute
+from utils.configread import config_read
+from scripts.convert_mysql_to_hive import ConvertMySQLToHive
+from backend.apps.analytics.services.hive_service import hive_execute
 
 dbtype, host, port, user, passwd, dbName, charset, _ = config_read("config.ini")
 

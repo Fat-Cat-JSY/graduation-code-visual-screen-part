@@ -1,7 +1,6 @@
 # coding: utf-8
 
-from impala.dbapi import connect
-
+from pyspark.sql import SparkSession
 from backend.graduation_project.settings import dbName
 from scripts.convert_mysql_to_hive import ConvertMySQLToHive
 
@@ -15,19 +14,27 @@ def hive_func(sql_list: list):
 
 
 def hive_execute(hive_list: list):
+    """
+    使用Spark SQL替代HS2执行HiveQL
+    """
     try:
-        conn = connect(host='127.0.0.1', port=10086, user="", password="")
+        spark = SparkSession.builder \
+            .appName("HiveOperations") \
+            .config("spark.sql.warehouse.dir", "/user/hive/warehouse") \
+            .config("hive.metastore.uris", "thrift://192.168.64.101:9083") \
+            .enableHiveSupport() \
+            .master("spark://192.168.64.101:7077") \
+            .getOrCreate()
+
+        for hive_sql in hive_list:
+            try:
+                spark.sql(hive_sql)
+                print(f"执行成功: {hive_sql}")
+            except Exception as e:
+                print(f"Exception======> {e}")
+                print(f"hive_sql=====> {hive_sql}")
+
+        spark.stop()
     except Exception as e:
-        print(f"{hive_execute} error : {e}")
+        print(f"SparkSession初始化失败: {e}")
         return
-    
-    cur = conn.cursor()
-
-    for hive_sql in hive_list:
-        try:
-            cur.execute(hive_sql)
-        except Exception as e:
-            print("Exception======>", e)
-            print("hive_sql=====>", hive_sql)
-
-    conn.close()
