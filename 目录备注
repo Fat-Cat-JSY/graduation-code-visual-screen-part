@@ -1,0 +1,17 @@
+taobao_men_shoes_analytics/
+├── backend/                    # Django后端
+│   ├── graduation_project/     # Django配置（原dj2）
+│   └── apps/
+│       ├── core/              # 核心业务（原main）
+│       │   └── views/         # 视图模块化
+│       ├── analytics/         # 大数据分析
+│       │   ├── services/      # Spark/Hive/HDFS服务
+│       │   └── views/         # 分析相关视图
+│       └── middleware/        # 中间件
+├── frontend/vue-admin/        # Vue前端
+├── media/uploads/             # 媒体文件
+├── scripts/                   # 脚本文件
+├── db/                        # 数据库脚本
+├── utils/                     # 通用工具
+├── config/                    # 配置文件
+└── docs/                      # 文档
