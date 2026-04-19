@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 import os
 from concurrent.futures.thread import ThreadPoolExecutor
 executor = ThreadPoolExecutor(20)
-from util.configread import config_read
+from utils.configread import config_read
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -37,8 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    "main",
-    'corsheaders',
+    'backend.apps.core',
+    'backend.apps.analytics',
 ]
 
 MIDDLEWARE = [
@@ -50,8 +50,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'threadlocals.middleware.ThreadLocalMiddleware',
-    "xmiddleware.xparam.Xparam",
-    "xmiddleware.xauth.Xauth",
+    "backend.apps.middleware.xparam.Xparam",
+    "backend.apps.middleware.xauth.Xauth",
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
 ]
@@ -69,8 +69,8 @@ SESSION_COOKIE_AGE = 1209600
 SESSION_EXPIRE_AT_BROWSER_CLOSE = False
 SESSION_SAVE_EVERY_REQUEST = False
 
-ROOT_URLCONF = 'dj2.urls'
-TEMPLATES_DIR = os.path.join(BASE_DIR, "templates")
+ROOT_URLCONF = 'backend.graduation_project.urls'
+TEMPLATES_DIR = os.path.join(BASE_DIR, "frontend/vue-admin")
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -87,15 +87,8 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'dj2.wsgi.application'
+WSGI_APPLICATION = 'backend.graduation_project.wsgi.application'
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_USE_TLS = False
-EMAIL_USE_SSL = True
-EMAIL_HOST = 'smtp.qq.com'
-EMAIL_PORT = 465
-EMAIL_HOST_USER = 'yclw9@qq.com'
-EMAIL_HOST_PASSWORD = 'mhbrkuayvkkgbijd'
 
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
@@ -178,16 +171,12 @@ USE_TZ = False
 
 STATIC_URL = '/assets/'
 STATICFILES_DIRS =[
-os.path.join(BASE_DIR, "templates/front/assets"),
+os.path.join(BASE_DIR, "frontend/vue-admin/src/assets"),
 ]
 
 # media
 MEDIA_URL = "/media/"  # 自定义
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # 自定义
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/uploads')  # 自定义
 if os.path.isdir(MEDIA_ROOT) == False:
     os.mkdir(MEDIA_ROOT)
 
-ALIPAY_APP_ID = '9021000127605975'
-APP_PRIVATE_KEY_STRING = open('{}/util/alipay_key/app_private_2048.txt'.format(BASE_DIR)).read()
-ALIPAY_PUBLIC_KEY_STRING = open('{}/util/alipay_key/alipay_public_2048.txt'.format(BASE_DIR)).read()
-ALIPAY_SIGN_TYPE = 'RSA2'
