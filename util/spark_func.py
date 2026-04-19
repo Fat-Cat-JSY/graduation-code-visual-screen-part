@@ -9,6 +9,7 @@ from pyspark.ml.feature import VectorAssembler
 from pyspark.ml.regression import LinearRegression
 from pyspark.sql import SparkSession
 
+move backend\apps\core\spark_group.py backend\apps\analytics\views\
 
 def spark_read_mysql(sql, json_filename):
     '''
